@@ -19,16 +19,16 @@ print(data_Values)
 
 
 
-individualData = np.zeros((70,finalTotalSize), dtype=np.float64)
+individualData = np.zeros((70,finalTotalSize), dtype=np.float64) # Change the number in X -> (X,finalTotalSize)
 
-for mm in range(70): # Change this number to change how many frames you iterate through
+for mm in range(70): # Number of frames to iterate through. change the number in X -> range(X)
     frame_index_start = (mm * finalTotalSize) + mm
     frame_index_end = ((mm+1) * finalTotalSize) + mm
     individualData[mm, 0:finalTotalSize] = data_Values[frame_index_start:frame_index_end]
     
 
 
-data = individualData[0, 0:finalTotalSize] # ??
+data = individualData[50, 0:finalTotalSize] # Which frame you want to use change the number in X -> [X,0:finalTotalSize]
 print("Data Length: ", len(data), "Data Type: ", data.dtype, "Data Shape: ", data.shape)
 
 YColour = np.reshape(data[0:totalSize],(height, width))
