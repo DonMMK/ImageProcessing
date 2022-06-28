@@ -9,7 +9,7 @@ nextTotalSize = int(totalSize*1.25)
 finalTotalSize = int(totalSize*1.5)
 print("Frame TotalSize: ", totalSize, "Frame TotalSize*1.25: ", nextTotalSize, "Frame FinalDataSize: ", finalTotalSize)
 
-data2 = open("/Users/don/Desktop/ImageProcessing/ImageDataMultipleFrames.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
+data2 = open("/Users/don/GitHub/ImageProcessing/ImageDataMultipleFrames.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
 print("Data2 Length: ", len(data2), "Data2 Type: ", type(data2))
 
 data_Values = np.frombuffer(data2, dtype=np.uint8)

@@ -30,7 +30,7 @@ end
 # Unset irrelevant variables.
 deactivate nondestructive
 
-set -gx VIRTUAL_ENV "/Users/don/Desktop/ImageProcessing/ImageProcessing"
+set -gx VIRTUAL_ENV "/Users/don/GitHub/ImageProcessing/ImageProcessing"
 
 set -gx _OLD_VIRTUAL_PATH $PATH
 set -gx PATH "$VIRTUAL_ENV/bin" $PATH
