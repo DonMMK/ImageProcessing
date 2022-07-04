@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import cv2 as cv
 
-NumberOfFrames = 5
+NumberOfFrames = 247
 CurrentFrameNumber = 0
 
 def render_one_frame(CurrentFrameNumber):
