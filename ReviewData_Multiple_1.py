@@ -11,7 +11,8 @@ print("Frame TotalSize: ", totalSize, "Frame TotalSize*1.25: ", nextTotalSize, "
 
 # data2 = open("/Users/don/GitHub/ImageProcessing/ImageDataMultipleFrames.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
 # data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav2.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
-data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav3.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
+#data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav3.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at 
+data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav4.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is ?? , Line 26 same, Line 33 is the frame you want to look at
 print("Data2 Length: ", len(data2), "Data2 Type: ", type(data2))
 
 data_Values = np.frombuffer(data2, dtype=np.uint8)
