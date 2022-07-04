@@ -2,9 +2,10 @@ from PIL import Image
 import numpy as np
 import cv2 as cv
 
+NumberOfFrames = 5
+CurrentFrameNumber = 0
 
-
-def render_one_frame():
+def render_one_frame(CurrentFrameNumber):
     height = 720 # 720
     width = 1280 # 1280
     totalSize = int(height * width)
@@ -33,7 +34,7 @@ def render_one_frame():
         frame_index_end = ((mm+1) * finalTotalSize) + 38*mm +38
         individualData[mm, 0:finalTotalSize] = data_Values[frame_index_start:frame_index_end]
     
-    data = individualData[0, 0:finalTotalSize] # Which frame you want to use change the number in X -> [X,0:finalTotalSize]
+    data = individualData[CurrentFrameNumber, 0:finalTotalSize] # Which frame you want to use change the number in X -> [X,0:finalTotalSize]
     print("Data Length: ", len(data), "Data Type: ", data.dtype, "Data Shape: ", data.shape)
 
     YColour = np.reshape(data[0:totalSize],(height, width))
@@ -94,8 +95,15 @@ def render_one_frame():
     imageData2[:,:,2] = B.astype("uint8")
 
     new_image2 = Image.fromarray(imageData2) #, mode="RGB"
-    new_image2.show()
+    #new_image2.show()
+    gif.append(new_image2)
+    
 
 if __name__ == "__main__":
-    render_one_frame()
+    images = []
+    gif = []
+    for x in range(NumberOfFrames):
+        render_one_frame(CurrentFrameNumber)
+        CurrentFrameNumber = CurrentFrameNumber + 1
+    gif[0].save('temp_result.gif', save_all=True,optimize=False, append_images=gif[1:], loop=0)
 
