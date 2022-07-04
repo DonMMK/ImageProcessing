@@ -43,8 +43,8 @@ print("Y", YColour.shape, np.max(YColour), np.min(YColour))
 print("U", UColour.shape, np.max(UColour), np.min(UColour))
 print("V", VColour.shape, np.max(VColour), np.min(VColour))
 
-repeatUColour_1 = np.repeat(UColour, 2, axis=1) # Reapeat each value twice along the rows
-repeatVColour_1 = np.repeat(VColour, 2, axis=1) # Reapeat each value twice along the rows
+repeatUColour_1 = np.repeat(UColour, 2, axis=1) # Repeat each value twice along the rows
+repeatVColour_1 = np.repeat(VColour, 2, axis=1) # Repeat each value twice along the rows
 
 repeatUColour_2 = np.repeat(repeatUColour_1, 2, axis=0) # Reapeat each value twice along the cols
 repeatVColour_2 = np.repeat(repeatVColour_1, 2, axis=0) # Reapeat each value twice along the cols
