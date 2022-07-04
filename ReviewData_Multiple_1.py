@@ -8,30 +8,30 @@ def render_one_frame():
     height = 720 # 720
     width = 1280 # 1280
     totalSize = int(height * width)
-nextTotalSize = int(totalSize*1.25)
-finalTotalSize = int(totalSize*1.5)
-print("Frame TotalSize: ", totalSize, "Frame TotalSize*1.25: ", nextTotalSize, "Frame FinalDataSize: ", finalTotalSize)
+    nextTotalSize = int(totalSize*1.25)
+    finalTotalSize = int(totalSize*1.5)
+    print("Frame TotalSize: ", totalSize, "Frame TotalSize*1.25: ", nextTotalSize, "Frame FinalDataSize: ", finalTotalSize)
 
-# data2 = open("/Users/don/GitHub/ImageProcessing/ImageDataMultipleFrames.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
-# data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav2.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
-#data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav3.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at 
-data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav4.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at
-print("Data2 Length: ", len(data2), "Data2 Type: ", type(data2))
+    # data2 = open("/Users/don/GitHub/ImageProcessing/ImageDataMultipleFrames.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
+    # data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav2.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
+    #data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav3.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at 
+    data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav4.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at
+    print("Data2 Length: ", len(data2), "Data2 Type: ", type(data2))
 
-data_Values = np.frombuffer(data2, dtype=np.uint8)
-data_Values = data_Values.astype(np.float64)
-data_Values = data_Values[5:]
-print("data_Values Length: ", len(data_Values), "data_Values Type: ", type(data_Values))
-print(data_Values)
+    data_Values = np.frombuffer(data2, dtype=np.uint8)
+    data_Values = data_Values.astype(np.float64)
+    data_Values = data_Values[5:]
+    print("data_Values Length: ", len(data_Values), "data_Values Type: ", type(data_Values))
+    print(data_Values)
 
 
 
-individualData = np.zeros((248,finalTotalSize), dtype=np.float64) # Change the number in X -> (X,finalTotalSize)
+    individualData = np.zeros((248,finalTotalSize), dtype=np.float64) # Change the number in X -> (X,finalTotalSize)
 
-for mm in range(248): # Number of frames to iterate through. change the number in X -> range(X)
-    frame_index_start = (mm * finalTotalSize) + 38*mm + 38
-    frame_index_end = ((mm+1) * finalTotalSize) + 38*mm +38
-    individualData[mm, 0:finalTotalSize] = data_Values[frame_index_start:frame_index_end]
+    for mm in range(248): # Number of frames to iterate through. change the number in X -> range(X)
+        frame_index_start = (mm * finalTotalSize) + 38*mm + 38
+        frame_index_end = ((mm+1) * finalTotalSize) + 38*mm +38
+        individualData[mm, 0:finalTotalSize] = data_Values[frame_index_start:frame_index_end]
     
     data = individualData[0, 0:finalTotalSize] # Which frame you want to use change the number in X -> [X,0:finalTotalSize]
     print("Data Length: ", len(data), "Data Type: ", data.dtype, "Data Shape: ", data.shape)
@@ -96,6 +96,6 @@ for mm in range(248): # Number of frames to iterate through. change the number i
     new_image2 = Image.fromarray(imageData2) #, mode="RGB"
     new_image2.show()
 
-if __name__ == "__main__"
+if __name__ == "__main__":
     render_one_frame()
 
