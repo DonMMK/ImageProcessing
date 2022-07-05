@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import cv2 as cv
 
-NumberOfFrames = 247
+NumberOfFrames = 61
 CurrentFrameNumber = 0
 
 def render_one_frame(CurrentFrameNumber):
@@ -13,10 +13,11 @@ def render_one_frame(CurrentFrameNumber):
     finalTotalSize = int(totalSize*1.5)
     print("Frame TotalSize: ", totalSize, "Frame TotalSize*1.25: ", nextTotalSize, "Frame FinalDataSize: ", finalTotalSize)
 
-    # data2 = open("/Users/don/GitHub/ImageProcessing/ImageDataMultipleFrames.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
-    # data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav2.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
+    #data2 = open("/Users/don/GitHub/ImageProcessing/ImageDataMultipleFrames.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
+    #data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav2.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
     #data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav3.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at 
-    data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav4.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at
+    #data2 = open("/Users/don/GitHub/ImageProcessing/test_tower_flight.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at
+    data2 = open("/Users/don/GitHub/ImageProcessing/final_test_for_handover3.txt","rb").read()
     print("Data2 Length: ", len(data2), "Data2 Type: ", type(data2))
 
     data_Values = np.frombuffer(data2, dtype=np.uint8)
@@ -27,9 +28,9 @@ def render_one_frame(CurrentFrameNumber):
 
 
 
-    individualData = np.zeros((248,finalTotalSize), dtype=np.float64) # Change the number in X -> (X,finalTotalSize)
+    individualData = np.zeros((NumberOfFrames,finalTotalSize), dtype=np.float64) # Change the number in X -> (X,finalTotalSize)
 
-    for mm in range(248): # Number of frames to iterate through. change the number in X -> range(X)
+    for mm in range(NumberOfFrames): # Number of frames to iterate through. change the number in X -> range(X)
         frame_index_start = (mm * finalTotalSize) + 38*mm + 38
         frame_index_end = ((mm+1) * finalTotalSize) + 38*mm +38
         individualData[mm, 0:finalTotalSize] = data_Values[frame_index_start:frame_index_end]
@@ -105,5 +106,7 @@ if __name__ == "__main__":
     for x in range(NumberOfFrames):
         render_one_frame(CurrentFrameNumber)
         CurrentFrameNumber = CurrentFrameNumber + 1
-    gif[0].save('temp_result.gif', save_all=True,optimize=False, append_images=gif[1:], loop=0)
+    #gif[0].save('test_tower_flight.gif', save_all=True,optimize=False, append_images=gif[1:], loop=0)
+    gif[0].save('final_test_for_handover3.gif', save_all=True,optimize=False, append_images=gif[1:], loop=0)
+    
 
