@@ -2,7 +2,7 @@ from PIL import Image
 import numpy as np
 import cv2 as cv
 
-NumberOfFrames = 23
+NumberOfFrames = 6
 CurrentFrameNumber = 0
 
 def render_one_frame(CurrentFrameNumber):
@@ -17,7 +17,9 @@ def render_one_frame(CurrentFrameNumber):
     #data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav2.txt","rb").read() #.splitlines() # , encoding= "utf-8" 
     #data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav3.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at 
     #data2 = open("/Users/don/GitHub/ImageProcessing/test_tower_flight.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at
-    data2 = open("/Users/don/GitHub/ImageProcessing/final_test_for_handover3.txt","rb").read()
+    #data2 = open("/Users/don/GitHub/ImageProcessing/final_test_for_handover3.txt","rb").read()
+    data2 = open("/Users/don/GitHub/ImageProcessing/verticalcamera.txt","rb").read()
+    
     print("Data2 Length: ", len(data2), "Data2 Type: ", type(data2))
 
     data_Values = np.frombuffer(data2, dtype=np.uint8)
@@ -96,7 +98,7 @@ def render_one_frame(CurrentFrameNumber):
     imageData2[:,:,2] = B.astype("uint8")
 
     new_image2 = Image.fromarray(imageData2) #, mode="RGB"
-    #new_image2.show()
+    new_image2.show()
     gif.append(new_image2)
     
 
@@ -107,6 +109,6 @@ if __name__ == "__main__":
         render_one_frame(CurrentFrameNumber)
         CurrentFrameNumber = CurrentFrameNumber + 1
     #gif[0].save('test_tower_flight.gif', save_all=True,optimize=False, append_images=gif[1:], loop=0)
-    gif[0].save('final_test_for_handover3.gif', save_all=True,optimize=False, append_images=gif[1:], loop=0)
+    gif[0].save('vertical_camera.gif', save_all=True,optimize=False, append_images=gif[1:], loop=0)
     
 
