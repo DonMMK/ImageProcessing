@@ -2,12 +2,12 @@ from PIL import Image
 import numpy as np
 import cv2 as cv
 
-NumberOfFrames = 18
+NumberOfFrames = 227
 CurrentFrameNumber = 0
 
 def render_one_frame(CurrentFrameNumber):
-    height = 320 # 720
-    width = 240 # 1280
+    height = 240 # 720
+    width = 320 # 1280
     totalSize = int(height * width)
     nextTotalSize = int(totalSize*1.25)
     finalTotalSize = int(totalSize*1.5)
@@ -64,13 +64,13 @@ def render_one_frame(CurrentFrameNumber):
     UImageColour = np.clip(UFull,0,255)
     VImageColour = np.clip(VFull,0,255)
 
-    R = np.clip(((YImageColour) + (1.402 * (VImageColour-128))), 0, 255)
-    G = np.clip(((YImageColour) - (0.344 * (UImageColour-128)) - (0.714 * (VImageColour-128))), 0, 255)
-    B = np.clip(((YImageColour) + (1.772 * (UImageColour-128))), 0, 255)
+    # R = np.clip(((YImageColour) + (1.402 * (VImageColour-128))), 0, 255)
+    # G = np.clip(((YImageColour) - (0.344 * (UImageColour-128)) - (0.714 * (VImageColour-128))), 0, 255)
+    # B = np.clip(((YImageColour) + (1.772 * (UImageColour-128))), 0, 255)
 
-    print("R", R.shape, np.max(R), np.min(R))
-    print("G", G.shape, np.max(G), np.min(G))
-    print("B", B.shape, np.max(B), np.min(B))
+    # print("R", R.shape, np.max(R), np.min(R))
+    # print("G", G.shape, np.max(G), np.min(G))
+    # print("B", B.shape, np.max(B), np.min(B))
 
 
     imageData = np.zeros((height, width, 3), dtype="uint8")
@@ -93,12 +93,12 @@ def render_one_frame(CurrentFrameNumber):
 
     imageData2 = np.zeros((height, width, 3), dtype="uint8")
 
-    imageData2[:,:,0] = R.astype("uint8")
-    imageData2[:,:,1] = G.astype("uint8")
-    imageData2[:,:,2] = B.astype("uint8")
+    # imageData2[:,:,0] = R.astype("uint8")
+    # imageData2[:,:,1] = G.astype("uint8")
+    # imageData2[:,:,2] = B.astype("uint8")
 
     new_image2 = Image.fromarray(imageData2) #, mode="RGB"
-    new_image2.show()
+    # new_image2.show()
     gif.append(new_image2)
     
 
