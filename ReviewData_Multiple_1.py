@@ -6,8 +6,8 @@ NumberOfFrames = 18
 CurrentFrameNumber = 0
 
 def render_one_frame(CurrentFrameNumber):
-    height = 720 # 720
-    width = 1280 # 1280
+    height = 320 # 720
+    width = 240 # 1280
     totalSize = int(height * width)
     nextTotalSize = int(totalSize*1.25)
     finalTotalSize = int(totalSize*1.5)
@@ -18,7 +18,7 @@ def render_one_frame(CurrentFrameNumber):
     #data2 = open("/Users/don/GitHub/ImageProcessing/ImageDatav3.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at 
     #data2 = open("/Users/don/GitHub/ImageProcessing/test_tower_flight.txt","rb").read() #.splitlines() # , encoding= "utf-8" # Line 24 is 36 , Line 26 same, Line 33 is the frame you want to look at
     #data2 = open("/Users/don/GitHub/ImageProcessing/final_test_for_handover3.txt","rb").read()
-    data2 = open("/Users/don/GitHub/ImageProcessing/VerticalData.txt","rb").read()
+    data2 = open("/home/don/Git/ImageProcessing/VerticalData.txt","rb").read()
     
     print("Data2 Length: ", len(data2), "Data2 Type: ", type(data2))
 
