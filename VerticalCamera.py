@@ -6,9 +6,10 @@ NumberOfFrames = 227
 CurrentFrameNumber = 0
 
 def render_one_frame(CurrentFrameNumber):
-    height = 240 # 720
-    width = 320 # 1280
-    totalSize = int(height * width)
+    height = 720 # 640 , 720
+    width = 1280 # 720, 1280
+    totalSize = height * width 
+    print("Total Size: ", totalSize)
     nextTotalSize = int(totalSize*1.25)
     finalTotalSize = int(totalSize*1.5)
     print("Frame TotalSize: ", totalSize, "Frame TotalSize*1.25: ", nextTotalSize, "Frame FinalDataSize: ", finalTotalSize)
@@ -40,29 +41,29 @@ def render_one_frame(CurrentFrameNumber):
     data = individualData[CurrentFrameNumber, 0:finalTotalSize] # Which frame you want to use change the number in X -> [X,0:finalTotalSize]
     print("Data Length: ", len(data), "Data Type: ", data.dtype, "Data Shape: ", data.shape)
 
-    YColour = np.reshape(data[0:totalSize],(height, width))
-    UColour = np.reshape(data[totalSize:finalTotalSize:2], (int(height/2), int(width/2)))
-    VColour = np.reshape(data[(totalSize+1):finalTotalSize:2], (int(height/2), int(width/2)))
+    # YColour = np.reshape(data[0:totalSize],(height, width))
+    # UColour = np.reshape(data[totalSize:finalTotalSize:2], (int(height/2), int(width/2)))
+    # VColour = np.reshape(data[(totalSize+1):finalTotalSize:2], (int(height/2), int(width/2)))
     
-    print("Y", YColour.shape, np.max(YColour), np.min(YColour))
-    print("U", UColour.shape, np.max(UColour), np.min(UColour))
-    print("V", VColour.shape, np.max(VColour), np.min(VColour))
+    # print("Y", YColour.shape, np.max(YColour), np.min(YColour))
+    # print("U", UColour.shape, np.max(UColour), np.min(UColour))
+    # print("V", VColour.shape, np.max(VColour), np.min(VColour))
 
-    repeatUColour_1 = np.repeat(UColour, 2, axis=1) # Repeat each value twice along the rows
-    repeatVColour_1 = np.repeat(VColour, 2, axis=1) # Repeat each value twice along the rows
+    # repeatUColour_1 = np.repeat(UColour, 2, axis=1) # Repeat each value twice along the rows
+    # repeatVColour_1 = np.repeat(VColour, 2, axis=1) # Repeat each value twice along the rows
 
-    repeatUColour_2 = np.repeat(repeatUColour_1, 2, axis=0) # Repeat each value twice along the cols
-    repeatVColour_2 = np.repeat(repeatVColour_1, 2, axis=0) # Repeat each value twice along the cols
+    # repeatUColour_2 = np.repeat(repeatUColour_1, 2, axis=0) # Repeat each value twice along the cols
+    # repeatVColour_2 = np.repeat(repeatVColour_1, 2, axis=0) # Repeat each value twice along the cols
 
-    UFull = np.resize(repeatUColour_2, (height, width))
-    VFull = np.resize(repeatVColour_2, (height, width))
+    # UFull = np.resize(repeatUColour_2, (height, width))
+    # VFull = np.resize(repeatVColour_2, (height, width))
 
-    print("UFull", UFull.shape)
-    print("VFull", VFull.shape)
+    # print("UFull", UFull.shape)
+    # print("VFull", VFull.shape)
 
-    YImageColour = np.clip(YColour,0,255)
-    UImageColour = np.clip(UFull,0,255)
-    VImageColour = np.clip(VFull,0,255)
+    # YImageColour = np.clip(YColour,0,255)
+    # UImageColour = np.clip(UFull,0,255)
+    # VImageColour = np.clip(VFull,0,255)
 
     # R = np.clip(((YImageColour) + (1.402 * (VImageColour-128))), 0, 255)
     # G = np.clip(((YImageColour) - (0.344 * (UImageColour-128)) - (0.714 * (VImageColour-128))), 0, 255)
@@ -75,9 +76,9 @@ def render_one_frame(CurrentFrameNumber):
 
     imageData = np.zeros((height, width, 3), dtype="uint8")
 
-    imageData[:,:,0] = YImageColour.astype("uint8")
-    imageData[:,:,1] = UImageColour.astype("uint8")
-    imageData[:,:,2] = VImageColour.astype("uint8")
+    # imageData[:,:,0] = YImageColour.astype("uint8")
+    # imageData[:,:,1] = UImageColour.astype("uint8")
+    # imageData[:,:,2] = VImageColour.astype("uint8")
 
     # new_image_Y = Image.fromarray(imageData[:,:,0]) #, mode="YCbCr"
     # new_image_Y.show()
