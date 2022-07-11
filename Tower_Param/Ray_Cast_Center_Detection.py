@@ -196,5 +196,7 @@ if __name__ == "__main__":
     # tower_lon = selected_frame_metaData[3]
     # drone_height = selected_frame_metaData[4]
 
-    # getframe_data()
+    for frame in range(1,758):
+        reshape_data = getframe_data(frame)
+    print(reshape_data)
     print("Inside Ray Cast Detection main")
