@@ -217,8 +217,6 @@ def find_image_pixel_ratio(half_imageHeight, half_imageWidth, height):
     return pix_x, pix_y
 
 
-
-
 if __name__ == "__main__":
     actualTower_Lat = get_decimal_from_dms([27, 31, 48.731846], "S")
     actualTower_Lon = get_decimal_from_dms([152, 49, 56.592026], "E")
@@ -265,7 +263,6 @@ if __name__ == "__main__":
 
     ratio_pix_x, ratio_pix_y = find_image_pixel_ratio(half_height, half_width, diff_towerHeight)
     print("ratio_pix_x: ", ratio_pix_x, "ratio_pix_y: ", ratio_pix_y)
-
     
     pix_length_x = select_bounding_box_center[1] - select_bounding_box_center[0]
     pix_length_y = select_bounding_box_center[3] - select_bounding_box_center[2]
@@ -282,7 +279,6 @@ if __name__ == "__main__":
     draw.rectangle((select_bounding_box_height[0], select_bounding_box_height[2], select_bounding_box_height[1], select_bounding_box_height[3]), outline =(255))
     # plt.imshow(pixel_image_height, cmap="gray")
     # plt.show()
-
 
     pixelData_center = getframe_data(select_frame_center)
     pixel_image_center = Image.fromarray(np.asarray(pixelData_center.astype("uint8"))) 
