@@ -68,10 +68,10 @@ def getAllframe_metaData():
     height = 1080 # 720
     width = 1920 # 1280
     totalSize = int(height * width)
-    nextTotalSize = int(totalSize*1.25)
+    nextTotalSize = int(totalSize*1.25) # did when it was doing the yuv stuff dont need it 
     finalTotalSize = int(totalSize*1.5)
 
-    data2 = open("/home/adam/Documents/Parrot Videos/Camera Frame Images/predictions-masks First Half/ImageData Large Complete FP.txt","rb").read()
+    data2 = open("/home/don/Git/ImageProcessing/ImageData.txt","rb").read() # Change here
     print("Data2 Length: ", len(data2), "Data2 Type: ", type(data2))
     
     data_Values = np.frombuffer(data2, dtype=np.uint8)
