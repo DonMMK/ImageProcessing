@@ -178,22 +178,23 @@ if __name__ == "__main__":
     
     # Set up the needed variables and functions needed from adam script
     allMetaData, imageHeight, imageWidth = getAllframe_metaData()
-    half_height = int(imageHeight/ 2)
-    half_width = int(imageWidth / 2)
+    print(allMetaData)
+    # half_height = int(imageHeight/ 2)
+    # half_width = int(imageWidth / 2)
 
-    towerHeight, height_imageframe, bounding_box_height, select_frame_height = find_tower_height(half_height, half_width)
+    # towerHeight, height_imageframe, bounding_box_height, select_frame_height = find_tower_height(half_height, half_width)
     
-    indx_height = height_imageframe.index(select_frame_height)
-    select_bounding_box_height = bounding_box_height[indx_height]
-    select_towerHeight = towerHeight[indx_height]
+    # indx_height = height_imageframe.index(select_frame_height)
+    # select_bounding_box_height = bounding_box_height[indx_height]
+    # select_towerHeight = towerHeight[indx_height]
 
-    tower_center_x, tower_center_y, center_imageframe, select_frame_center, bounding_box_center = find_tower_center(half_height, half_width)
+    # tower_center_x, tower_center_y, center_imageframe, select_frame_center, bounding_box_center = find_tower_center(half_height, half_width)
     
-    selected_frame_metaData = allMetaData[select_frame_center - 1]
+    # selected_frame_metaData = allMetaData[select_frame_center - 1]
 
-    tower_lat = selected_frame_metaData[2]
-    tower_lon = selected_frame_metaData[3]
-    drone_height = selected_frame_metaData[4]
+    # tower_lat = selected_frame_metaData[2]
+    # tower_lon = selected_frame_metaData[3]
+    # drone_height = selected_frame_metaData[4]
 
-    getframe_data()
+    # getframe_data()
     print("Inside Ray Cast Detection main")
