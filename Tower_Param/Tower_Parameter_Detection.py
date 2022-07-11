@@ -39,7 +39,6 @@ def get_new_Lat_Lon(x, y, dronePos, tower):
 
     return (newLat, newLon, latError, lonError)
 
-
 def getframe_data(frameNumber):
 
     if frameNumber < 759:
@@ -120,7 +119,7 @@ def find_tower_height(half_height, half_width):
         min_y = np.nonzero(sumdata_y)[0][0]
         max_y = np.nonzero(sumdata_y)[0][-1]
 
-        print(maximum_value, max_y - min_y)
+        # print(maximum_value, max_y - min_y)
 
         diff_x_pix_temp = maximum_index - half_width
         diff_y_pix_temp = maximum_value - half_height
@@ -131,7 +130,7 @@ def find_tower_height(half_height, half_width):
             # selected_frame_metaData[3], "cameraheight: ", selected_frame_metaData[4], "cameraYaw: ", selected_frame_metaData[5], "cameraPitch: ",
             # selected_frame_metaData[6], "cameraRoll: ", selected_frame_metaData[7])
 
-           print(diff_x_pix_temp, diff_y_pix_temp)
+        #    print(diff_x_pix_temp, diff_y_pix_temp)
            
            bbox.append([min_x, max_x, min_y, max_y])
            imageFrame.append(frame)
@@ -200,7 +199,6 @@ def find_tower_center(half_height, half_width):
         
     return center_x_diff, center_y_diff, center_frame_num, select_frame, bbox
 
-
 def find_image_pixel_ratio(half_imageHeight, half_imageWidth, height):
     # FOV_x = 65 * math.pi / 180
     # FOV_y = 73 * math.pi / 180
@@ -228,23 +226,23 @@ if __name__ == "__main__":
     half_width = int(imageWidth / 2)
     print("half_height: ", half_height, "half_width: ", half_width)
 
-    towerHeight, height_imageframe, bounding_box_height, select_frame_height = find_tower_height(half_height, half_width)
-    # towerHeight = [-34.86970520019531, -34.87581253051758, -34.86766052246094, -36.25898361206055]
-    # height_imageframe = [200, 201, 202, 754]
-    # bounding_box_height = [[590, 1185, 491, 1079], [591, 1185, 497, 1079], [591, 1186, 500, 1079], [621, 1350, 561, 1079]]
-    # select_frame_height = 754
+    # towerHeight, height_imageframe, bounding_box_height, select_frame_height = find_tower_height(half_height, half_width)
+    towerHeight = [-34.86970520019531, -34.87581253051758, -34.86766052246094, -36.25898361206055]
+    height_imageframe = [200, 201, 202, 754]
+    bounding_box_height = [[590, 1185, 491, 1079], [591, 1185, 497, 1079], [591, 1186, 500, 1079], [621, 1350, 561, 1079]]
+    select_frame_height = 754
 
     indx_height = height_imageframe.index(select_frame_height)
     select_bounding_box_height = bounding_box_height[indx_height]
     select_towerHeight = towerHeight[indx_height]
 
-    tower_center_x, tower_center_y, center_imageframe, select_frame_center, bounding_box_center = find_tower_center(half_height, half_width)
-    # tower_center_x = [-155.5, -152.5, -150.0, -148.5, -150.0, -157.0, -163.0, -158.5, -158.0, -155.5]  
-    # tower_center_y = [125.0, 114.0, 55.5, 28.0, 1.0, -30.5, -50.0, -71.0, -92.5, -112.5]
-    # center_imageframe = [871, 872, 873, 874, 875, 876, 877, 878, 879, 880]
-    # bounding_box_center = [[570, 1039, 411, 919], [574, 1041, 429, 879], [574, 1046, 335, 856], [573, 1050, 306, 830], [572, 1048, 280, 802], 
-    #     [566, 1040, 250, 769], [563, 1031, 228, 752], [558, 1045, 210, 728], [560, 1044, 189, 706], [559, 1050, 167, 688]]
-    # select_frame_center = 875
+    # tower_center_x, tower_center_y, center_imageframe, select_frame_center, bounding_box_center = find_tower_center(half_height, half_width)
+    tower_center_x = [-155.5, -152.5, -150.0, -148.5, -150.0, -157.0, -163.0, -158.5, -158.0, -155.5]  
+    tower_center_y = [125.0, 114.0, 55.5, 28.0, 1.0, -30.5, -50.0, -71.0, -92.5, -112.5]
+    center_imageframe = [871, 872, 873, 874, 875, 876, 877, 878, 879, 880]
+    bounding_box_center = [[570, 1039, 411, 919], [574, 1041, 429, 879], [574, 1046, 335, 856], [573, 1050, 306, 830], [572, 1048, 280, 802], 
+          [566, 1040, 250, 769], [563, 1031, 228, 752], [558, 1045, 210, 728], [560, 1044, 189, 706], [559, 1050, 167, 688]]
+    select_frame_center = 875
 
     selected_frame_metaData = allMetaData[select_frame_center - 1]
 
