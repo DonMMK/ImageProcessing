@@ -59,126 +59,22 @@ def getAllframe_metaData():
 
         frame_MetaData.append(struct.unpack("<HIddffff", individual_Meta_Data))
     
-    print("Done Get All Frame MetaData")
+    # print("Done Get All Frame MetaData")
 
     return frame_MetaData, height, width    
 
-def find_tower_height(half_height, half_width):
-   
-    tower_Height = []
-    diff_y_pix = imageHeight
-    bbox = []
-    imageFrame = []
-    select_frame = 0
-
-    for frame in range(1, 758):
-        frameNumber = frame
-        selectedFrame = frameNumber - 1
-        
-        selected_frame_metaData = allMetaData[selectedFrame]
-
-        pixelData = getframe_data(frameNumber)      
-
-        sumdata_x = np.sum(pixelData/255, axis=0)
-        min_x = np.nonzero(sumdata_x)[0][0]
-        max_x = np.nonzero(sumdata_x)[0][-1]
-
-        # Find the column with most white pixels
-        maximum_index = np.argmax(sumdata_x) # The column with the highest pixel count
-        maximum_value = sumdata_x[maximum_index] # The number of pixels in column, height
-
-        sumdata_y = np.sum(pixelData/255, axis=1)
-        min_y = np.nonzero(sumdata_y)[0][0]
-        max_y = np.nonzero(sumdata_y)[0][-1]
-
-        # print(maximum_value, max_y - min_y)
-
-        diff_x_pix_temp = maximum_index - half_width
-        diff_y_pix_temp = maximum_value - half_height
-        
-        if abs(diff_y_pix_temp) < 50:
-
-            # print("frameNum: ", selected_frame_metaData[0], "frameLen: ", selected_frame_metaData[1], "cameraLat: ", selected_frame_metaData[2], "cameraLon: ", 
-            # selected_frame_metaData[3], "cameraheight: ", selected_frame_metaData[4], "cameraYaw: ", selected_frame_metaData[5], "cameraPitch: ",
-            # selected_frame_metaData[6], "cameraRoll: ", selected_frame_metaData[7])
-
-        #    print(diff_x_pix_temp, diff_y_pix_temp)
-           
-           bbox.append([min_x, max_x, min_y, max_y])
-           imageFrame.append(frame)
-           tower_Height.append(selected_frame_metaData[4])
-
-           if (diff_y_pix_temp < diff_y_pix):
-                diff_y_pix = diff_y_pix_temp
-                select_frame = frame
-        
-    print("Get Tower Height Done")
-    return tower_Height, imageFrame, select_frame, bbox
-
-def find_tower_center(half_height, half_width):
-    center_x_diff = []
-    center_y_diff = []
-    center_diff = 1000
-    center_frame_num = []   
-
-    select_frame = 0
-    bbox = []
-
-    for frame in range(800, 900):
-        frameNumber = frame
-
-        pixelData = getframe_data(frameNumber)
-
-        imageData2 = np.zeros((imageHeight, imageWidth,1), dtype="uint8")
-        imageData2 = pixelData.astype("uint8")
-        new_image2 = Image.fromarray(imageData2) 
-
-        edges_image = new_image2.filter(ImageFilter.FIND_EDGES)
-
-        edge_data = np.asarray(edges_image)
-
-        sumdata_x = np.sum(edge_data, axis=0)
-        min_x = np.nonzero(sumdata_x)[0][0]
-        max_x = np.nonzero(sumdata_x)[0][-1]
-
-        sumdata_y = np.sum(edge_data, axis=1)
-        min_y = np.nonzero(sumdata_y)[0][0]
-        max_y = np.nonzero(sumdata_y)[0][-1]
-        
-        center_x_temp = min_x + (max_x - min_x) / 2
-        center_y_temp = min_y + (max_y - min_y) / 2
-
-        x_diff = (center_x_temp - half_width)
-        y_diff = (center_y_temp - half_height)
-        diff_len = math.sqrt(x_diff**2 + y_diff**2)
-
-        print(center_x_temp, center_y_temp, diff_len)
-
-        if diff_len < 200:
-
-            center_x_diff.append(x_diff)
-            center_y_diff.append(y_diff)
-            center_frame_num.append(frame)
-            bbox.append([min_x, max_x, min_y, max_y])
-
-            diff_from_center = math.sqrt(x_diff**2 + y_diff**2)
-
-            if diff_from_center < center_diff:
-                select_frame = frame
-
-                center_diff = diff_from_center
-
-        
-    return center_x_diff, center_y_diff, center_frame_num, select_frame, bbox
-
-
-
-
 if __name__ == "__main__":
     
-    # Set up the needed variables and functions needed from adam script
+    # Get all metadata needed
     allMetaData, imageHeight, imageWidth = getAllframe_metaData()
-    print(allMetaData)
+    print("Finished Processing Metadata")
+
+    # Get all the reshaped frame data needed
+    for frame in range(759,1006):
+        reshape_data = getframe_data(frame)
+    print("Finished Processing Frame Data")
+
+
     # half_height = int(imageHeight/ 2)
     # half_width = int(imageWidth / 2)
 
@@ -195,8 +91,3 @@ if __name__ == "__main__":
     # tower_lat = selected_frame_metaData[2]
     # tower_lon = selected_frame_metaData[3]
     # drone_height = selected_frame_metaData[4]
-
-    for frame in range(1,758):
-        reshape_data = getframe_data(frame)
-    print(reshape_data)
-    print("Inside Ray Cast Detection main")
